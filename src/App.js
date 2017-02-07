@@ -68,15 +68,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/*<ul>
-        {this.state.resources.map((resource) => {
-          return <li><a href={resource.url}>{resource.title}</a></li>
-        
-        })}
-        </ul>*/}
-        <Subject items={this.state.resources[0]} />
-        <Subject items={this.state.resources[1]} />
-        
+
+        {this.state.resources.map((week) => {
+
+          return (
+              <Subject items={week} />
+            )
+          }
+        )}
+
       </div>
     );
   }
