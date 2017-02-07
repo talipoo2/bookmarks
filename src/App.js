@@ -23,7 +23,9 @@ class App extends Component {
                       url: "https://www.youtube.com/watch?v=6sQDTgOqh-I"}
                     ]},
 
-                    {subject : "ES6", 
+                    {
+
+                    subject : "ES6", 
                     resources :[
 
                       {title: "Essential ES6 / ES2015 JavaScript", 
