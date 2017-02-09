@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Subject from './Subject';
+// import Button from './Button';
 
 class App extends Component {
 
@@ -65,18 +66,24 @@ class App extends Component {
 
   // event handlers go here
 
+ 
+
   render() {
     return (
       <div>
 
+      
+
         {this.state.resources.map((week) => {
 
           return (
-              <Subject items={week} />
+                <Subject items={week} />
+                
             )
           }
         )}
 
+        
       </div>
     );
   }
