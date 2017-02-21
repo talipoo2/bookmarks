@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
 
     this.addNewResource = this.addNewResource.bind(this);
+    this.addNewSubject = this.addNewSubject.bind(this);
 
     this.state =  { resources : [
 
@@ -72,16 +73,16 @@ class App extends Component {
   // event handlers go here
 
   addNewResource(subject,resource) {
-    // console.log('subject:::::::', subject);
-    // console.log('resource:::::::', resource);
     const tempState = this.state;
-    
-    console.log(this.state);
-
     tempState.resources[subject].resources.push(resource);
     this.setState(tempState);
+  }
 
-    
+  addNewSubject(event) {
+    console.log("I'm a Button!");
+    const tempState = this.state;
+    tempState.resources.push(resources);
+    this.setState(tempState);
   }
  
 
@@ -94,6 +95,7 @@ class App extends Component {
                 <div>
                   <Subject index={index} addResource={this.addNewResource} items={resource} key={index} />
                    <Button/>
+                   <button onClick={this.addNewSubject}>Button on App</button>
                 </div>
                 
             )
