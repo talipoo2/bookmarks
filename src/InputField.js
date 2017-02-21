@@ -18,11 +18,11 @@ export default class Input extends Component {
 		return(
 			<form onSubmit={this.handleSubmit}>
 		        <label>
-		          Subject:
+		          Name:
 		          <input type="text" value={this.state.value} onChange={this.handleChange} />
 		        </label>
 		        <input type="submit" value="Submit" />
-		    </form>
+	      	</form>
 		)
 	}
 }

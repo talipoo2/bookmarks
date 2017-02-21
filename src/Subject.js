@@ -25,9 +25,12 @@ export default class Subject extends Component {
 	handleSubmit(event) {
 		// alert('A name was submitted: ' + this.state.value);
 		event.preventDefault();
-		console.log(this.state);
-		
-
+		// console.log(this.state);
+		const newResource = {
+			title: this.state.title,
+			url: this.state.url,
+		}
+		this.props.addResource(this.props.index, newResource);
 	}
 
 	handleInputChange(event) {
@@ -38,7 +41,7 @@ export default class Subject extends Component {
 	    this.setState({
 	      [name]: value
 	    });
-	    console.log(this.state);
+	    // console.log(this.state);
 	 }
 
 	// event handlers
@@ -51,10 +54,6 @@ export default class Subject extends Component {
 		// e.setAttribute("className", blue); //For IE; harmless to other browsers.
 		 
 	  }
-
-	countMylinks(e) {
-		// set.setState({mykey: 'this is bananas'});
-	}
 
 	handleClick() {
 		this.setState(prevState => ({
@@ -74,9 +73,9 @@ export default class Subject extends Component {
 			<div>
 				<h2 onClick={this.clickSubject.bind(this)}>{this.props.items.subject}</h2>
 				<ul>
-					{this.props.items.resources.map((resource) => { 
+					{this.props.items.resources.map((resource, i) => { 
 						return(	
-							<li>							
+							<li key={i}>							
 								<a href="{resource.title}">{resource.title}</a>
 							</li>	
 						)} 
@@ -85,25 +84,14 @@ export default class Subject extends Component {
 
 				<br/><br/><br/>
 				
-				<button onClick={this.handleClick}>I'm a Button!</button>
-
-				<br/><br/><br/>
-				<form onSubmit={this.handleSubmit}>
-			        <label>
-			          Subject:
-			          <input type="text" value={this.state.value} onChange={this.handleChange} />
-			        </label>
-			        <input type="submit" value="Submit" />
-			    </form>
-
-			    <br/><br/><br/>
 			    <form>
 			        <label>
 			          title:
 			          <input
 			            name="title"
+			            placeholder="title"
 			            type="text"
-			            checked={this.state.title}
+			            value={this.state.title}
 			            onChange={this.handleInputChange} />
 			        </label>
 			        <br />
@@ -111,10 +99,21 @@ export default class Subject extends Component {
 			          url:
 			          <input
 			            name="url"
+			            placeholder="url"
 			            type="text"
 			            value={this.state.url}
 			            onChange={this.handleInputChange} />
 			        </label>
+			        <br/><br/>
+			        <select>
+					  <option value="grapefruit">Grapefruit</option>
+					  <option value="lime">Lime</option>
+					  <option selected value="coconut">Coconut</option>
+					  <option value="mango">Mango</option>
+					</select>
+
+					<br/><br/><br/>
+			        <button onClick={this.handleSubmit}>Click me!</button>
 			      </form>
 
 			</div>

@@ -7,16 +7,14 @@ export default class Button extends Component {
 
 	// event handlers
 	  handleClick(e) {
+	    event.preventDefault();
 	    alert('OUCH!');
 	  }
 	
 	render() {
 		return(
 			<div>
-				<a href="#" onClick={this.handleClick}>
-		          Click me
-		        </a>
-		        <button>This is button</button>
+		        <button onClick={this.handleClick}>This is button</button>
 	        </div>
 		)
 	}

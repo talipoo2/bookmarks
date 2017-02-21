@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Subject from './Subject';
+import Button from './Button';
 // import InputField from './InputField';
-// import Button from './Button';
+
 // import Content from './Content.json';
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.UpdateHomeWork();
+    this.addNewResource = this.addNewResource.bind(this);
 
     this.state =  { resources : [
 
@@ -69,18 +70,31 @@ class App extends Component {
   }
 
   // event handlers go here
-  UpdateHomeWork(title, url){
-    console.log(title, url);
-  } 
+
+  addNewResource(subject,resource) {
+    // console.log('subject:::::::', subject);
+    // console.log('resource:::::::', resource);
+    const tempState = this.state;
+    
+    console.log(this.state);
+
+    tempState.resources[subject].resources.push(resource);
+    this.setState(tempState);
+
+    
+  }
  
 
   render() {
     return (
       <div>
-        {this.state.resources.map((week) => {
+        {this.state.resources.map((resource, index) => {
 
           return (
-                <Subject items={week} callBack={this.UpdateHomeWork} />
+                <div>
+                  <Subject index={index} addResource={this.addNewResource} items={resource} key={index} />
+                   <Button/>
+                </div>
                 
             )
           }
