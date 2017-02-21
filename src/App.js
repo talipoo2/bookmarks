@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Subject from './Subject';
-import Button from './Button';
+// import Button from './Button';
 // import InputField from './InputField';
 
 // import Content from './Content.json';
@@ -14,8 +14,12 @@ class App extends Component {
 
     this.addNewResource = this.addNewResource.bind(this);
     this.addNewSubject = this.addNewSubject.bind(this);
+    this.handleInputChangeSubject = this.handleInputChangeSubject.bind(this);
 
-    this.state =  { resources : [
+    this.state =  { 
+
+                    subject: '',
+                    resources : [
 
                     {subject : "Functional Programming Basics", 
                     resources :[
@@ -79,30 +83,58 @@ class App extends Component {
   }
 
   addNewSubject(event) {
-    console.log("I'm a Button!");
+    // console.log("I'm a Button!");
+    const newSubject =  {
+      subject: this.state.subject,
+      resources: [],
+    }
     const tempState = this.state;
-    tempState.resources.push(resources);
+    tempState.resources.push(newSubject);
     this.setState(tempState);
+
   }
+
+  handleInputChangeSubject(event) {
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
+
+      this.setState({
+        [name]: value
+      });
+      // console.log(this.state);
+   }
  
 
   render() {
     return (
       <div>
         {this.state.resources.map((resource, index) => {
-
           return (
-                <div>
-                  <Subject index={index} addResource={this.addNewResource} items={resource} key={index} />
-                   <Button/>
-                   <button onClick={this.addNewSubject}>Button on App</button>
-                </div>
-                
+                  <div>
+                    <Subject index={index} addResource={this.addNewResource} items={resource} key={index} />
+                  </div>       
             )
           }
         )}
-
+        <div><br/> <br/> <br/> <br/> 
+          <h2>Add New Subject:</h2>
+          <form>
+            <label htmlFor="subject">
+            Add New Subject:
+            </label>
+            <input
+            name="subject"
+            placeholder="subject"
+            type="text"
+            value={this.state.subject}
+          onChange={this.handleInputChangeSubject} />
+          </form>
+          <button onClick={this.addNewSubject}>Add Subject</button>
+        </div>
       </div>
+
+
 
 
     );

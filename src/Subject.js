@@ -70,7 +70,7 @@ export default class Subject extends Component {
 
 	render() {
 		return(
-			<div>
+			<div className="week">
 				<h2 onClick={this.clickSubject.bind(this)}>{this.props.items.subject}</h2>
 				<ul>
 					{this.props.items.resources.map((resource, i) => { 
@@ -81,9 +81,6 @@ export default class Subject extends Component {
 						)} 
 					)}
 				</ul>
-
-				<br/><br/><br/>
-				
 			    <form>
 			        <label>
 			          title:
@@ -104,16 +101,9 @@ export default class Subject extends Component {
 			            value={this.state.url}
 			            onChange={this.handleInputChange} />
 			        </label>
-			        <br/><br/>
-			        <select>
-					  <option value="grapefruit">Grapefruit</option>
-					  <option value="lime">Lime</option>
-					  <option selected value="coconut">Coconut</option>
-					  <option value="mango">Mango</option>
-					</select>
 
 					<br/><br/><br/>
-			        <button onClick={this.handleSubmit}>Click me!</button>
+			        <button onClick={this.handleSubmit}>Add Resource</button>
 			      </form>
 
 			</div>
