@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Subject from './Subject';
+import NewSubject from './NewSubject';
 // import Button from './Button';
 // import InputField from './InputField';
 
@@ -14,7 +15,6 @@ class App extends Component {
 
     this.addNewResource = this.addNewResource.bind(this);
     this.addNewSubject = this.addNewSubject.bind(this);
-    this.handleInputChangeSubject = this.handleInputChangeSubject.bind(this);
 
     this.state =  { 
 
@@ -82,29 +82,14 @@ class App extends Component {
     this.setState(tempState);
   }
 
-  addNewSubject(event) {
-    // console.log("I'm a Button!");
-    const newSubject =  {
-      subject: this.state.subject,
-      resources: [],
-    }
+  addNewSubject(subject) {
     const tempState = this.state;
-    tempState.resources.push(newSubject);
+    tempState.resources.push(subject);
     this.setState(tempState);
-
   }
 
-  handleInputChangeSubject(event) {
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
-
-      this.setState({
-        [name]: value
-      });
-      // console.log(this.state);
-   }
- 
+  deleteSubject(subject) {
+  }
 
   render() {
     return (
@@ -117,26 +102,8 @@ class App extends Component {
             )
           }
         )}
-        <div><br/> <br/> <br/> <br/> 
-          <h2>Add New Subject:</h2>
-          <form>
-            <label htmlFor="subject">
-            Add New Subject:
-            </label>
-            <input
-            name="subject"
-            placeholder="subject"
-            type="text"
-            value={this.state.subject}
-          onChange={this.handleInputChangeSubject} />
-          </form>
-          <button onClick={this.addNewSubject}>Add Subject</button>
-        </div>
+        <NewSubject addNewSubject={this.addNewSubject} />
       </div>
-
-
-
-
     );
   }
 }
