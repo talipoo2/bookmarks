@@ -15,6 +15,8 @@ class App extends Component {
 
     this.addNewResource = this.addNewResource.bind(this);
     this.addNewSubject = this.addNewSubject.bind(this);
+    this.deleteResource = this.deleteResource.bind(this);
+    this.deleteSubject = this.deleteSubject.bind(this);
 
     this.state =  { 
 
@@ -69,8 +71,72 @@ class App extends Component {
                       {
                         title: "Learn ES6 (ECMAScript 2015)", 
                         url: "https://egghead.io/courses/learn-es6-ecmascript-2015"}
-                    ]}
+                    ]},
 
+                    {
+                      subject : "Introduction to React", 
+                      resources :[
+
+                      {
+                        title: "Handling Events", 
+                        url: "https://facebook.github.io/react/docs/handling-events.html"},
+                      
+                      {
+                        title: "React Stateless Functional Components: Nine Wins You Might Have Overlooked", 
+                        url: "https://medium.com/@housecor/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc#.jblm2w9dp"},
+                      
+                      {
+                        title: "Events & ReactJS", 
+                        url: "https://www.youtube.com/watch?v=OcM__8q6p4c&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS&index=8"},
+                      
+                      {
+                        title: "State of Components", 
+                        url: "https://www.youtube.com/watch?v=e5n9j9n83OM&index=9&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS"},
+                      
+                      {
+                        title: "How does ReactJS update the DOM?", 
+                        url: "https://www.youtube.com/watch?v=Iw2BLUjQo1E&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS&index=10"},
+                      
+                      {
+                        title: "https://www.youtube.com/watch?v=SEkfzqIgvTo&index=11&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS", 
+                        url: "Stateless Components"},
+                      
+                      {
+                        title: "Understanding JavaScript’s Function.prototype.bind", 
+                        url: "https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/"},
+                    ]},
+                    {
+                      subject : "For testing", 
+                      resources :[
+
+                      {
+                        title: "1", 
+                        url: "1"},
+                      
+                      {
+                        title: "2", 
+                        url: "2"},
+                      
+                      {
+                        title: "3", 
+                        url: "3"},
+                      
+                      {
+                        title: "4", 
+                        url: "4"},
+                      
+                      {
+                        title: "5", 
+                        url: "5"},
+                      
+                      {
+                        title: "6", 
+                        url: "6"},
+                      
+                      {
+                        title: "7", 
+                        url: "7"},
+                    ]}
                   ]}
   }
 
@@ -88,7 +154,18 @@ class App extends Component {
     this.setState(tempState);
   }
 
-  deleteSubject(subject) {
+  deleteSubject(subject){
+    const tempState = this.state;
+    tempState.resources.splice(subject, 1);
+    this.setState(tempState);
+  }
+
+  deleteResource(subject, resource){
+    console.log("in app.js", subject, resource);
+    const tempState = this.state;
+    tempState.resources[subject].resources.splice(resource, 1);
+    this.setState(tempState);
+    
   }
 
   render() {
@@ -97,7 +174,13 @@ class App extends Component {
         {this.state.resources.map((resource, index) => {
           return (
                   <div>
-                    <Subject index={index} addResource={this.addNewResource} items={resource} key={index} />
+                    <Subject 
+                    index={index} 
+                    addResource={this.addNewResource}
+                    deleteResource={this.deleteResource}
+                    deleteSubject={this.deleteSubject} 
+                    items={resource} 
+                    key={index} />
                   </div>       
             )
           }

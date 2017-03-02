@@ -16,6 +16,8 @@ export default class Subject extends Component {
 		this.handleChange = this.handleChange.bind(this);
     	this.handleSubmit = this.handleSubmit.bind(this);
     	this.handleInputChange = this.handleInputChange.bind(this);
+    	this.deleteResource = this.deleteResource.bind(this);
+    	this.deleteSubject = this.deleteSubject.bind(this);
 	}	
 
 	handleChange(event) {
@@ -45,11 +47,10 @@ export default class Subject extends Component {
 	 }
 
 	// event handlers
-	clickSubject(e) {
+	clickSubject(event) {
 	    // alert('OUCH!');
 	    console.log('Subject Clicked');
-      	e.currentTarget.style.backgroundColor = '#2F4F4F';
-      	e.currentTarget.style.color = '#FFF';
+      	event.currentTarget.style.color = '#cc0000';
   		//e.setAttribute("class", blue); //For Most Browsers
 		// e.setAttribute("className", blue); //For IE; harmless to other browsers.
 		 
@@ -68,44 +69,67 @@ export default class Subject extends Component {
 		}, 100)
 	}  
 
+	deleteResource(event){
+		event.preventDefault();
+		const subject = this.props.index;
+		const resource = event.target.value;	
+		this.props.deleteResource(subject, resource);
+		console.log("in Subject.js", subject, resource);
+	}
+
+  	deleteSubject(event){
+		event.preventDefault();
+		this.props.deleteSubject(this.props.index);
+	}
+
 	render() {
 		return(
-			<div className="week">
+			<div className="container">
 				<h2 onClick={this.clickSubject.bind(this)}>{this.props.items.subject}</h2>
+				<div className="week container">
 				<ul>
-					{this.props.items.resources.map((resource, i) => { 
+					{this.props.items.resources.map((resource, index) => { 
 						return(	
-							<li key={i}>							
+							<li key={index} className="list-group-item">							
 								<a href="{resource.title}">{resource.title}</a>
+								&nbsp;&nbsp;&nbsp;
+								<input 
+									type="checkbox" 
+									value={index} 
+									onClick={this.deleteResource}/>
 							</li>	
 						)} 
 					)}
 				</ul>
 			    <form>
 			        <label>
-			          title:
-			          <input
-			            name="title"
-			            placeholder="title"
-			            type="text"
-			            value={this.state.title}
-			            onChange={this.handleInputChange} />
-			        </label>
-			        <br />
+			          Title:
+			        </label>  
+			        <input
+				        name="title"
+				        placeholder="Title"
+				        type="text"
+				        value={this.state.title}
+				        onChange={this.handleInputChange}>
+				    </input>
 			        <label>
-			          url:
+			          URL: 
+			        </label>  
 			          <input
 			            name="url"
-			            placeholder="url"
+			            placeholder="URL"
 			            type="text"
 			            value={this.state.url}
-			            onChange={this.handleInputChange} />
-			        </label>
+			            onChange={this.handleInputChange} >
+			        </input>
+			        <button className="btn btn-lg btn-info" onClick={this.handleSubmit}>Add Resource</button><br/><br/>
 
-					<br/><br/><br/>
-			        <button onClick={this.handleSubmit}>Add Resource</button>
+					<br/><br/>
+			        
+			        <button className="btn btn-lg btn-warning" onClick={this.deleteSubject}>Delete Subject</button>&nbsp;&nbsp;
+			        
 			      </form>
-
+			    </div>
 			</div>
 		)
 	}
