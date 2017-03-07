@@ -91,7 +91,7 @@ export default class Subject extends Component {
 					{this.props.items.resources.map((resource, index) => { 
 						return(	
 							<li key={index} className="list-group-item">							
-								<a href="{resource.title}">{resource.title}</a>
+								<a href={resource.url} target="_blank">{resource.title}</a>
 								&nbsp;&nbsp;&nbsp;
 								<input 
 									type="checkbox" 
